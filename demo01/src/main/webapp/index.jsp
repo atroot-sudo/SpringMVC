@@ -34,5 +34,17 @@
     市：<input type="text" name="add.city"> <br>
     <input type="submit" name="保存"> <br>
 </form>
+
+<form action="test/handle06" method="post">
+    书名：张三流浪记 <br>
+    作者：<input type="text" name="author"> <br>
+    价格：<input type="text" name="price"> <br>
+    库存：<input type="text" name="stock"> <br>
+    销量：<input type="text" name="sales"> <br>
+    省：<input type="text" name="add.province"> <br>
+    市：<input type="text" name="add.city"> <br>
+    <input type="submit" name="保存"> <br>
+</form>
+
 </body>
 </html>

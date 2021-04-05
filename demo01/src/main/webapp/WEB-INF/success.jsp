@@ -12,6 +12,9 @@
 </head>
 <body>
 <h1>hello success!</h1>
-<h2>success,成功!</h2>
+<h2>success,成功!</h2> <br>
+
+req: ${requestScope.get("msg")} <br>
+session: ${sessionScope.get("msg")}
 </body>
 </html>
