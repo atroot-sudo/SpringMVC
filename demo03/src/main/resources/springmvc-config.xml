@@ -6,7 +6,7 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.theoldzheng"/>
-    <!--    配置view解析器 简化方法的返回值 进行"拼串儿"-->
+<!--        配置view解析器 简化方法的返回值 进行"拼串儿"-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>

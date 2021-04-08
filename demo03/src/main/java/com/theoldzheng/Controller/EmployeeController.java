@@ -1,11 +1,14 @@
 package com.theoldzheng.Controller;
 
+import com.theoldzheng.bean.Department;
 import com.theoldzheng.bean.Employee;
+import com.theoldzheng.dao.DepartmentDao;
 import com.theoldzheng.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Collection;
 
@@ -21,11 +24,43 @@ public class EmployeeController {
     @Autowired
     private EmployeeDao employeeDao;
 
+    @Autowired
+    private DepartmentDao departmentDao;
+
     @RequestMapping(value = "/emps")
     public String getEmps(Model model) {
         Collection<Employee> all = employeeDao.getAll();
-        model.addAllAttributes(all);
+        model.addAttribute("emps", all);
         return "list";
+    }
+
+    /**
+     * 处理点击list.jsp页面的添加按钮执行操作
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/toAddPage")
+    public String add(Model model) {
+        //遍历部门，进而传递到request域中等待被获取
+        Collection<Department> departments = departmentDao.getDepartments();
+        model.addAttribute("dept", departments);
+        model.addAttribute("employee", new Employee());
+        return "add";
+    }
+
+    /**
+     * 处理保存按钮后的操作
+     *
+     * @param employee
+     * @return
+     */
+    @RequestMapping(value = "/emp", method = RequestMethod.POST)
+    public String addEmp(Employee employee) {
+        employeeDao.save(employee);
+        System.out.println("save successfully!");
+        //添加成功后进行重定向到显示所有employee
+        return "redirect:/emps";
     }
 
 }
