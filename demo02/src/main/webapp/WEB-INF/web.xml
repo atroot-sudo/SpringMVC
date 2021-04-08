@@ -3,35 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
-    <!-- springMVC入口 -->
     <servlet>
         <servlet-name>SpringDispatcherServlet</servlet-name>
-        <!-- url分发器 -->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-
-        <!-- 找springMVC主配置文件 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!-- 控制器类 -->
             <param-value>classpath:springmvc-servlet.xml</param-value>
         </init-param>
-        <!-- 启动TOMCAT容器时就加载DispatcherServlet 服务器启动的时候创建对象，值越小，优先级越高，越先创建对象 -->
-        <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <!-- 所有的请求都走SpringMVC -->
     <servlet-mapping>
         <servlet-name>SpringDispatcherServlet</servlet-name>
-        <!--        /* 和 /都是拦截所有请求，但是/ 不会拦截.jsp 能保证jsp的正常访问  /*的范围更大，会拦截到.jsp 导致无法显示-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!--    解决POST请求乱码的filter-->
+    
+<!--    字符编码过滤器-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -43,16 +31,6 @@
     </filter>
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--    支持REST风格的filter-->
-    <filter>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>
