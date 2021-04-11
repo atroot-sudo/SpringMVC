@@ -7,11 +7,12 @@ import com.theoldzheng.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -58,22 +59,31 @@ public class EmployeeController {
      * @return
      */
     @RequestMapping(value = "/emp", method = RequestMethod.POST)
-    public String addEmp(Employee employee) {
-        employeeDao.save(employee);
-        System.out.println("save successfully!");
-        //添加成功后进行重定向到显示所有employee
-        return "redirect:/emps";
+    public String addEmp(@Valid Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("信息校验失败！");
+            return "add";
+        }else {
+
+            employeeDao.save(employee);
+            System.out.println("save successfully!");
+            //添加成功后进行重定向到显示所有employee
+            return "redirect:/emps";
+        }
+
     }
-    @RequestMapping(value = "/emp/{id}",method = RequestMethod.GET)
-    public String Edit(@PathVariable("id") Integer id,Model model){
+
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+    public String Edit(@PathVariable("id") Integer id, Model model) {
         Employee employee = employeeDao.get(id);
         Collection<Department> departments = departmentDao.getDepartments();
 
-        model.addAttribute("dept",departments);
-        model.addAttribute("employee",employee);
+        model.addAttribute("dept", departments);
+        model.addAttribute("employee", employee);
         return "edit";
 
     }
+
     @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
     public String update(Employee employee) {
         System.out.println("要修改的：" + employee);
@@ -83,11 +93,10 @@ public class EmployeeController {
         return "redirect:/emps";
     }
 
-    @RequestMapping(value = "/emp/{id}",method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Integer id) {
         employeeDao.delete(id);
         System.out.println("delete successful!");
         return "redirect:/emps";
     }
-
 }

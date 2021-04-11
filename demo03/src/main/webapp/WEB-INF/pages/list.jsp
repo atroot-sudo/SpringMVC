@@ -24,6 +24,7 @@
         <th>lastName</th>
         <th>email</th>
         <th>gender</th>
+        <th>birth</th>
         <th>departmentName</th>
         <th>EDIT</th>
         <th>DELETE</th>
@@ -34,6 +35,7 @@
             <td>${emp.lastName}</td>
             <td>${emp.email}</td>
             <td>${emp.gender == 1? "男":"女"}</td>
+            <td>${emp.birth}</td>
             <td>${emp.department}</td>
             <td>
                 <a href="${reallyPath}/emp/${emp.id}">EDIT</a>
