@@ -22,12 +22,12 @@
     pageContext.setAttribute("reallyPath",request.getContextPath());
 %>
 <form:form action="${reallyPath}/emp" modelAttribute="employee" method="post">
-    lastName: <form:input path="lastName"/> <form:errors path="lastName"/> <br>
-    email: <form:input path="email"/> <form:errors path="email"/> <br>
+    lastName: <form:input path="lastName"/> ${errorInf.lastName} <br>
+    email: <form:input path="email"/> ${errorInf.email} <br>
     gender: <br>
     男：<form:radiobutton path="gender" value="1"/>
     女：<form:radiobutton path="gender" value="0"/> <br>
-    birth : <form:input path="birth"/> <%--<form:errors path="birth"/>--%> <br>
+    birth : <form:input path="birth"/> ${errorInf.birth}<br>
     <%--    items 表示从request域中拿到的信息，itemLabel 表示展示给用户预览的选项的"假值" itemValue 则为实际要传给服务器的值--%>
     部门： <form:select path="department.id" items="${dept}" itemLabel="departmentName" itemValue="id"/> <br>
     <input type="submit" value="保存！">

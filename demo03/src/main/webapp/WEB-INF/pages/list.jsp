@@ -51,5 +51,6 @@
 </table>
 <br>
 <a href="toAddPage">添加员工</a>
+<a href="${reallyPath}/getUrl">ajax</a>
 </body>
 </html>
