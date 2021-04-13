@@ -23,16 +23,15 @@
     $("a:first").click(function () {
 
         $.ajax({
-            url:"${reallyPath}/ajaxTest",
-            type:"GET",
-            success:function (data) {
-                $.each(data,function () {
+            url: "${reallyPath}/ajaxTest",
+            type: "GET",
+            success: function (data) {
+                $.each(data, function () {
                     var empInfo = this.id + this.lastName + "---" + this.birth + "---" + this.gender + "---" + this.email + "---" + this.department;
-                    $("da1").append(empInfo + "<" + "br" + ">" );
+                    $("da1").append(empInfo + "<" + "br" + ">");
                 })
             }
         });
-
     });
 
 </script>
